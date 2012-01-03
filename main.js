@@ -10,9 +10,42 @@ function main () {
   ctx.fillRect(220, 0, 80, 500);
   ctx.fillRect(20, 0, 200, 80);
   ctx.fillRect(20, 480, 200, 20);
-  drawTetrimino('J', 0, 3);
-  drawTetrimino('L', 0, 6);
-  drawTetrimino('T', 0, 9);
+
+  setInterval(drawLoop, 500);
+}
+
+
+var tetriminoList = [
+  {"tetName":"O", "width":2, "height":2},
+  {"tetName":"I", "width":4, "height":1},
+  {"tetName":"S", "width":3, "height":2},
+  {"tetName":"Z", "width":3, "height":2},
+  {"tetName":"J", "width":3, "height":2},
+  {"tetName":"L", "width":3, "height":2},
+  {"tetName":"T", "width":3, "height":2},
+];
+/*
+var nowX = 0;
+var nowY = 0;
+var nowBlock = 'T';
+*/
+var datas = [
+  {x:0, y:18, rot:0, tet:6},
+  {x:3, y:18, rot:0, tet:6},
+  
+];
+function drawLoop () {
+  ctx.clearRect(20, 80, 200, 400);
+  
+  for (var i=0; i < datas.length; i++) {
+    var tet = tetriminoList[datas[i].tet].tetName;
+    drawTetrimino(tet, datas[i].x, datas[i].y);
+  }
+  /*
+  drawTetrimino(nowBlock, nowX, nowY);
+  if (nowY < 18) 
+    nowY += 1;
+    */
 }
 
 function drawTetrimino (blockName, mapX, mapY) {
