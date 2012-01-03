@@ -10,7 +10,9 @@ function main () {
   ctx.fillRect(220, 0, 80, 500);
   ctx.fillRect(20, 0, 200, 80);
   ctx.fillRect(20, 480, 200, 20);
-  drawTetrimino('Z', 2, 3);
+  drawTetrimino('J', 0, 3);
+  drawTetrimino('L', 0, 6);
+  drawTetrimino('T', 0, 9);
 }
 
 function drawTetrimino (blockName, mapX, mapY) {
@@ -111,6 +113,76 @@ function drawTetrimino (blockName, mapX, mapY) {
         offsetY + tetOffsetY
       );
       break;
+    case 'J':
+      ctx.fillStyle = "rgb(0, 154, 214)";
+      ctx.strokeStyle = "rgb(0, 76, 105)";
+
+      var tetOffsetX = mapX * blockSizeW;
+      var tetOffsetY = mapY * blockSizeH;
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY
+      );
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY + 20
+      );
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY + 40
+      );
+      drawBlock(
+        offsetX + tetOffsetX,
+        offsetY + tetOffsetY + 40
+      );
+      break;
+    case 'L':
+      ctx.fillStyle = "rgb(243, 152, 0)";
+      ctx.strokeStyle = "rgb(120, 75, 0)";
+
+      var tetOffsetX = mapX * blockSizeW;
+      var tetOffsetY = mapY * blockSizeH;
+      drawBlock(
+        offsetX + tetOffsetX,
+        offsetY + tetOffsetY
+      );
+      drawBlock(
+        offsetX + tetOffsetX,
+        offsetY + tetOffsetY + 20
+      );
+      drawBlock(
+        offsetX + tetOffsetX,
+        offsetY + tetOffsetY + 40
+      );
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY + 40
+      );
+      break;
+    case 'T':
+      ctx.fillStyle = "rgb(167, 87, 168)";
+      ctx.strokeStyle = "rgb(80, 42, 82,)";
+
+      var tetOffsetX = mapX * blockSizeW;
+      var tetOffsetY = mapY * blockSizeH;
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY
+      );
+      drawBlock(
+        offsetX + tetOffsetX,
+        offsetY + tetOffsetY + 20
+      );
+      drawBlock(
+        offsetX + tetOffsetX + 20,
+        offsetY + tetOffsetY + 20
+      );
+      drawBlock(
+        offsetX + tetOffsetX + 40,
+        offsetY + tetOffsetY + 20
+      );
+      break;
+ 
     default:
       console.log('error');
   }
