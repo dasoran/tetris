@@ -16,36 +16,55 @@ function main () {
 
 
 var tetriminoList = [
-  {"tetName":"O", "width":2, "height":2},
-  {"tetName":"I", "width":4, "height":1},
-  {"tetName":"S", "width":3, "height":2},
-  {"tetName":"Z", "width":3, "height":2},
-  {"tetName":"J", "width":3, "height":2},
-  {"tetName":"L", "width":3, "height":2},
-  {"tetName":"T", "width":3, "height":2},
+  {"tetName":"O", "width":2, "height":2, "fillColor":"rgb(255, 212, 0)", "color":"rgb(128, 60, 0)"},
+  {"tetName":"I", "width":4, "height":1, "fillColor":"rgb(175, 223, 228)", "color":"rgb(75, 110, 110)"},
+  {"tetName":"S", "width":3, "height":2, "fillColor":"rgb(185, 196, 47)", "color":"rgb(85, 93, 20)"},
+  {"tetName":"Z", "width":3, "height":2, "fillColor":"rgb(237, 26, 61)", "color":"rgb(110, 12, 30)"},
+  {"tetName":"J", "width":3, "height":2, "fillColor":"rgb(0, 154, 214)", "color":"rgb(0, 76, 105)"},
+  {"tetName":"L", "width":3, "height":2, "fillColor":"rgb(243, 152, 0)", "color":"rgb(120, 75, 0)"},
+  {"tetName":"T", "width":3, "height":2, "fillColor":"rgb(167, 87, 168)", "color":"rgb(80, 42, 82)"},
 ];
-/*
+var datas = [
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+  [0, 1, 2, 3, 4, 5, 6, -1, -1, -1],
+];
 var nowX = 0;
 var nowY = 0;
-var nowBlock = 'T';
-*/
-var datas = [
-  {x:0, y:18, rot:0, tet:6},
-  {x:3, y:18, rot:0, tet:6},
-  
-];
+var nowBlock;
 function drawLoop () {
   ctx.clearRect(20, 80, 200, 400);
-  
-  for (var i=0; i < datas.length; i++) {
-    var tet = tetriminoList[datas[i].tet].tetName;
-    drawTetrimino(tet, datas[i].x, datas[i].y);
-  }
   /*
-  drawTetrimino(nowBlock, nowX, nowY);
-  if (nowY < 18) 
-    nowY += 1;
-    */
+  if (nowBlock == undefined) {
+  }
+  */
+  for (var y=0; y < datas.length; y++) {
+    for (var x=0; x < datas[y].length; x++) {
+      if (datas[y][x] == -1) continue;
+      var fillColor = tetriminoList[datas[y][x]].fillColor;
+      var color = tetriminoList[datas[y][x]].color;
+      ctx.fillStyle = fillColor;
+      ctx.strokeStyle = color;
+      drawBlockWithMap(x, y);
+    }
+  }
 }
 
 function drawTetrimino (blockName, mapX, mapY) {
@@ -194,7 +213,7 @@ function drawTetrimino (blockName, mapX, mapY) {
       break;
     case 'T':
       ctx.fillStyle = "rgb(167, 87, 168)";
-      ctx.strokeStyle = "rgb(80, 42, 82,)";
+      ctx.strokeStyle = "rgb(80, 42, 82)";
 
       var tetOffsetX = mapX * blockSizeW;
       var tetOffsetY = mapY * blockSizeH;
@@ -219,6 +238,16 @@ function drawTetrimino (blockName, mapX, mapY) {
     default:
       console.log('error');
   }
+}
+
+function drawBlockWithMap (mapX, mapY) {
+  var tetOffsetX = mapX * blockSizeW;
+  var tetOffsetY = mapY * blockSizeH;
+  var offsetX = 20;
+  var offsetY = 80;
+  var x = tetOffsetX + offsetX;
+  var y = tetOffsetY + offsetY;
+  drawRect (x, y, blockSizeW, blockSizeH);
 }
 
 function drawBlock (x, y) {
